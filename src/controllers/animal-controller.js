@@ -14,6 +14,11 @@ exports.post = (req, res, next) => {
     res.status(400).send({'mensagem': 'A idade do animal deve ser um número.'});
   }
 
+  // Validações
+  if (nome.length < 3) {
+    res.status(400).send({'mensagem': 'O nome deve ter pelo menso 3 caracteres'});
+  }
+
   // Novo animal a ser inserido
   const novoAnimal = {
     'id': nanoid(),
