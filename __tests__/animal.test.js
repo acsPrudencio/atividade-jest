@@ -33,7 +33,7 @@ describe('inserção usuários', () => {
         fs.writeFileSync('src/data/animals.json', JSON.stringify(animalsData));
     });
 
-    if('deve retornar uma lista com todos os usuarios',  async() => {
+    it('deve retornar uma lista com todos os usuarios',  async() => {
         const res = await request(app).get('/animais');
         expect(res.status).toBe(200);
         expect(res.body.length).toBe(3);
@@ -55,12 +55,12 @@ describe('inserção usuários', () => {
         expect(res.status).toBe(400);
     });
 
-    if('A idade do animal deve ser um número.', async() => {
+    it('A idade do animal deve ser um número.', async() => {
         const res = await request(app).post('/animais?nome=Dog&especie=Cachorro&idade=a')
         expect(res.status).toBe(400);
     });
 
-    if('O nome deve ter pelo menso 3 caracteres.', async() => {
+    it('O nome deve ter pelo menso 3 caracteres.', async() => {
         const res = await request(app).post('/animais?nome=D2&especie=Cachorro&idade=a')
         expect(res.status).toBe(400);
     });
