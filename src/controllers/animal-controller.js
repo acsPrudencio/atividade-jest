@@ -39,3 +39,18 @@ exports.get = (req, res, next) => {
   // Retorna todos os animais cadastrados
   res.status(200).send(animalsData);
 };
+
+exports.delete = (req, res, next) => {
+  const id = req.params.id;
+
+  const resultadoIndex = animalsData.findIndex((animal) => animal.id == id);
+
+  if(resultadoIndex == -1){
+    res.status(404).send({'mensagem': 'O usuário a ser deletado não existe.'});
+    return;
+  }
+
+  animalsData.splice(resultadoIndex, 1);
+  fs.writeFileSync('src/data/animals.json', JSON.stringify(animalsData));
+  res.status(200).send({'mensagem':'Usuário deletado.'});
+};
